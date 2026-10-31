@@ -1,0 +1,25 @@
+#!/bin/sh
+# ----------------------------------------------------------------------------
+# Maven Wrapper Shell Script for Unix / Linux / macOS (PeerLearn Project)
+# ----------------------------------------------------------------------------
+
+export MAVEN_PROJECTBASEDIR=${MAVEN_BASEDIR:-"$PWD"}
+MVNW_USERNAME=""
+MVNW_PASSWORD=""
+MVNW_REPOURL="https://repo.maven.apache.org/maven2"
+
+# Check if system mvn is available
+if command -v mvn >/dev/null 2>&1; then
+    exec mvn "$@"
+fi
+
+# Fallback to wrapper jar
+WRAPPER_JAR="$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.jar"
+if [ ! -f "$WRAPPER_JAR" ]; then
+    echo "[PeerLearn] Downloading Maven Wrapper jar..."
+    mkdir -p "$MAVEN_PROJECTBASEDIR/.mvn/wrapper"
+    curl -sS -o "$WRAPPER_JAR" "https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.2.0/maven-wrapper-3.2.0.jar" || \
+    wget -q -O "$WRAPPER_JAR" "https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/3.2.0/maven-wrapper-3.2.0.jar"
+fi
+
+exec java -jar "$WRAPPER_JAR" "$@"

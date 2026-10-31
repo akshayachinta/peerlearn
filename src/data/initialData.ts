@@ -1,0 +1,419 @@
+import {
+  Student,
+  SkillCategoryName,
+  SkillItem,
+  ExchangeRequest,
+  LearningSession,
+  ActivityLog,
+  Announcement,
+  ReviewItem
+} from '../types';
+
+export const INITIAL_SKILLS: SkillItem[] = [
+  // Programming
+  { id: 'p1', name: 'Python', category: 'Programming', popular: true },
+  { id: 'p2', name: 'Java', category: 'Programming', popular: true },
+  { id: 'p3', name: 'C', category: 'Programming', popular: false },
+  { id: 'p4', name: 'C++', category: 'Programming', popular: true },
+  { id: 'p5', name: 'JavaScript', category: 'Programming', popular: true },
+
+  // Web Development
+  { id: 'w1', name: 'HTML', category: 'Web Development', popular: true },
+  { id: 'w2', name: 'CSS', category: 'Web Development', popular: true },
+  { id: 'w3', name: 'Bootstrap', category: 'Web Development', popular: false },
+
+  // Data and AI
+  { id: 'd1', name: 'Machine Learning', category: 'Data and AI', popular: true },
+  { id: 'd2', name: 'Data Science', category: 'Data and AI', popular: true },
+  { id: 'd3', name: 'Artificial Intelligence', category: 'Data and AI', popular: true },
+
+  // Career Skills
+  { id: 'c1', name: 'Aptitude', category: 'Career Skills', popular: true },
+  { id: 'c2', name: 'Interview Preparation', category: 'Career Skills', popular: true },
+  { id: 'c3', name: 'Resume Building', category: 'Career Skills', popular: true },
+
+  // Communication
+  { id: 'm1', name: 'English Speaking', category: 'Communication', popular: true },
+  { id: 'm2', name: 'Public Speaking', category: 'Communication', popular: false },
+  { id: 'm3', name: 'Presentation Skills', category: 'Communication', popular: true },
+
+  // Creative
+  { id: 'r1', name: 'Canva', category: 'Creative', popular: true },
+  { id: 'r2', name: 'Graphic Design', category: 'Creative', popular: true },
+  { id: 'r3', name: 'UI/UX Design', category: 'Creative', popular: true },
+  { id: 'r4', name: 'Video Editing', category: 'Creative', popular: false },
+
+  // Cloud and DevOps
+  { id: 'v1', name: 'AWS', category: 'Cloud and DevOps', popular: true },
+  { id: 'v2', name: 'Docker', category: 'Cloud and DevOps', popular: true },
+  { id: 'v3', name: 'Kubernetes', category: 'Cloud and DevOps', popular: false },
+  { id: 'v4', name: 'Git', category: 'Cloud and DevOps', popular: true },
+  { id: 'v5', name: 'GitHub', category: 'Cloud and DevOps', popular: true },
+];
+
+export const INITIAL_STUDENTS: Student[] = [
+  {
+    id: 'student-srija',
+    name: 'Srija Chinta',
+    email: 'chintaassrija@gmail.com',
+    collegeName: 'Vasavi College of Engineering',
+    branch: 'Computer Science & Engineering',
+    academicYear: '3rd Year',
+    avatarBg: '#7546D8',
+    avatarColor: '#FFFFFF',
+    bio: 'Passionate about algorithmic problem solving and backend pipelines. Looking to build full-stack enterprise skills!',
+    availability: 'Available',
+    rating: 4.95,
+    reviewCount: 14,
+    xpPoints: 1250,
+    completedSessionsCount: 8,
+    badges: ['Python Sensei', 'Top Peer Mentor', 'Fast Responder'],
+    status: 'ACTIVE',
+    createdAt: '2026-08-15T10:00:00.000Z',
+    skills: [
+      { id: 'sk-1', skillName: 'Python', category: 'Programming', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: '3 years, NumPy & Flask' },
+      { id: 'sk-2', skillName: 'HTML', category: 'Web Development', proficiency: 'Intermediate', type: 'TEACH', yearsExperienceOrGoal: 'Semantic markup' },
+      { id: 'sk-3', skillName: 'Machine Learning', category: 'Data and AI', proficiency: 'Intermediate', type: 'TEACH', yearsExperienceOrGoal: 'Scikit-learn models' },
+      { id: 'sk-4', skillName: 'Java', category: 'Programming', proficiency: 'Advanced', type: 'LEARN', yearsExperienceOrGoal: 'Spring Boot & Microservices' },
+      { id: 'sk-5', skillName: 'Docker', category: 'Cloud and DevOps', proficiency: 'Intermediate', type: 'LEARN', yearsExperienceOrGoal: 'Containerization & CI/CD' },
+      { id: 'sk-6', skillName: 'UI/UX Design', category: 'Creative', proficiency: 'Beginner', type: 'LEARN', yearsExperienceOrGoal: 'Figma wireframing' },
+    ]
+  },
+  {
+    id: 'student-rahul',
+    name: 'Rahul Verma',
+    email: 'rahul.verma@cbit.ac.in',
+    collegeName: 'Chaitanya Bharathi Institute of Technology',
+    branch: 'Information Technology',
+    academicYear: '3rd Year',
+    avatarBg: '#5425A8',
+    avatarColor: '#FFFFFF',
+    bio: 'Java ecosystem explorer and DevOps learner. Eager to master Python for competitive coding and AI.',
+    availability: 'Available',
+    rating: 4.9,
+    reviewCount: 11,
+    xpPoints: 1100,
+    completedSessionsCount: 7,
+    badges: ['Java Architect', 'Consistent Exchanger', 'Code Reviewer'],
+    status: 'ACTIVE',
+    createdAt: '2026-08-20T11:30:00.000Z',
+    skills: [
+      { id: 'sk-7', skillName: 'Java', category: 'Programming', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'Spring Data, OOP principles' },
+      { id: 'sk-8', skillName: 'Docker', category: 'Cloud and DevOps', proficiency: 'Intermediate', type: 'TEACH', yearsExperienceOrGoal: 'Multi-stage Dockerfiles' },
+      { id: 'sk-9', skillName: 'C++', category: 'Programming', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'STL & Competitive Programming' },
+      { id: 'sk-10', skillName: 'Python', category: 'Programming', proficiency: 'Intermediate', type: 'LEARN', yearsExperienceOrGoal: 'Pandas & Scripting' },
+      { id: 'sk-11', skillName: 'UI/UX Design', category: 'Creative', proficiency: 'Beginner', type: 'LEARN', yearsExperienceOrGoal: 'Dashboard UX patterns' },
+    ]
+  },
+  {
+    id: 'student-ananya',
+    name: 'Ananya Sharma',
+    email: 'ananya.sharma@osmania.ac.in',
+    collegeName: 'Osmania University College of Engineering',
+    branch: 'Artificial Intelligence & Data Science',
+    academicYear: '2nd Year',
+    avatarBg: '#A78BFA',
+    avatarColor: '#202033',
+    bio: 'Data science enthusiast loving math, analytics, and clean statistical storytelling.',
+    availability: 'Available',
+    rating: 4.85,
+    reviewCount: 9,
+    xpPoints: 920,
+    completedSessionsCount: 5,
+    badges: ['Data Wizard', 'Insightful Teacher'],
+    status: 'ACTIVE',
+    createdAt: '2026-09-01T09:15:00.000Z',
+    skills: [
+      { id: 'sk-12', skillName: 'Machine Learning', category: 'Data and AI', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'Supervised & Unsupervised' },
+      { id: 'sk-13', skillName: 'Data Science', category: 'Data and AI', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'EDA & Feature engineering' },
+      { id: 'sk-14', skillName: 'Python', category: 'Programming', proficiency: 'Intermediate', type: 'TEACH', yearsExperienceOrGoal: 'Data pipelines' },
+      { id: 'sk-15', skillName: 'Bootstrap', category: 'Web Development', proficiency: 'Intermediate', type: 'LEARN', yearsExperienceOrGoal: 'Responsive dashboards' },
+      { id: 'sk-16', skillName: 'Public Speaking', category: 'Communication', proficiency: 'Beginner', type: 'LEARN', yearsExperienceOrGoal: 'Overcoming stage fear' },
+    ]
+  },
+  {
+    id: 'student-vikram',
+    name: 'Vikram Malhotra',
+    email: 'vikram.m@hyderabad.bits-pilani.ac.in',
+    collegeName: 'BITS Pilani Hyderabad Campus',
+    branch: 'Electronics & Communication',
+    academicYear: '4th Year',
+    avatarBg: '#16A36A',
+    avatarColor: '#FFFFFF',
+    bio: 'Cloud architecture and infrastructure automation buff. Certified AWS Cloud Practitioner.',
+    availability: 'Weekends Only',
+    rating: 4.98,
+    reviewCount: 16,
+    xpPoints: 1680,
+    completedSessionsCount: 12,
+    badges: ['Cloud Champion', 'Campus Senior', 'DevOps Guru'],
+    status: 'ACTIVE',
+    createdAt: '2026-07-10T14:00:00.000Z',
+    skills: [
+      { id: 'sk-17', skillName: 'AWS', category: 'Cloud and DevOps', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'EC2, S3, IAM, Lambda' },
+      { id: 'sk-18', skillName: 'Git', category: 'Cloud and DevOps', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'Branching, Rebasing, PRs' },
+      { id: 'sk-19', skillName: 'Kubernetes', category: 'Cloud and DevOps', proficiency: 'Intermediate', type: 'TEACH', yearsExperienceOrGoal: 'Pods, Services, Deployments' },
+      { id: 'sk-20', skillName: 'Machine Learning', category: 'Data and AI', proficiency: 'Intermediate', type: 'LEARN', yearsExperienceOrGoal: 'Deep Learning fundamentals' },
+      { id: 'sk-21', skillName: 'Graphic Design', category: 'Creative', proficiency: 'Beginner', type: 'LEARN', yearsExperienceOrGoal: 'Branding basics' },
+    ]
+  },
+  {
+    id: 'student-meera',
+    name: 'Meera Patel',
+    email: 'meera.p@vnrvjiet.in',
+    collegeName: 'VNR Vignana Jyothi Institute',
+    branch: 'Computer Science & Design',
+    academicYear: '2nd Year',
+    avatarBg: '#F5A623',
+    avatarColor: '#202033',
+    bio: 'Product designer focusing on accessible interactions and design systems.',
+    availability: 'Available',
+    rating: 4.88,
+    reviewCount: 12,
+    xpPoints: 1040,
+    completedSessionsCount: 6,
+    badges: ['Creative Visionary', 'Design Mentor'],
+    status: 'ACTIVE',
+    createdAt: '2026-09-12T16:20:00.000Z',
+    skills: [
+      { id: 'sk-22', skillName: 'UI/UX Design', category: 'Creative', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'Wireframing, typography, Figma' },
+      { id: 'sk-23', skillName: 'Canva', category: 'Creative', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'Presentation decks & flyers' },
+      { id: 'sk-24', skillName: 'Presentation Skills', category: 'Communication', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'Pitch deck storytelling' },
+      { id: 'sk-25', skillName: 'AWS', category: 'Cloud and DevOps', proficiency: 'Beginner', type: 'LEARN', yearsExperienceOrGoal: 'Cloud hosting basics' },
+      { id: 'sk-26', skillName: 'Python', category: 'Programming', proficiency: 'Beginner', type: 'LEARN', yearsExperienceOrGoal: 'Automating repetitive design tasks' },
+    ]
+  },
+  {
+    id: 'student-karthik',
+    name: 'Karthik Reddy',
+    email: 'karthik.reddy@griet.ac.in',
+    collegeName: 'Gokaraju Rangaraju Institute of Tech',
+    branch: 'Mechanical Engineering',
+    academicYear: '4th Year',
+    avatarBg: '#E05252',
+    avatarColor: '#FFFFFF',
+    bio: 'Placement coordinator with 30+ mock interview sessions conducted. Ready to boost your career preparation!',
+    availability: 'Available',
+    rating: 4.92,
+    reviewCount: 15,
+    xpPoints: 1450,
+    completedSessionsCount: 10,
+    badges: ['Career Mentor', 'Interview Ace', 'Placement Star'],
+    status: 'ACTIVE',
+    createdAt: '2026-08-05T08:30:00.000Z',
+    skills: [
+      { id: 'sk-27', skillName: 'Aptitude', category: 'Career Skills', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'Quant & logical reasoning' },
+      { id: 'sk-28', skillName: 'Interview Preparation', category: 'Career Skills', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'HR & Technical rounds' },
+      { id: 'sk-29', skillName: 'Resume Building', category: 'Career Skills', proficiency: 'Advanced', type: 'TEACH', yearsExperienceOrGoal: 'ATS optimization' },
+      { id: 'sk-30', skillName: 'C++', category: 'Programming', proficiency: 'Intermediate', type: 'LEARN', yearsExperienceOrGoal: 'DSA in C++' },
+      { id: 'sk-31', skillName: 'Video Editing', category: 'Creative', proficiency: 'Beginner', type: 'LEARN', yearsExperienceOrGoal: 'Premiere basics' },
+    ]
+  }
+];
+
+export const INITIAL_REQUESTS: ExchangeRequest[] = [
+  {
+    id: 'req-1',
+    senderId: 'student-rahul',
+    senderName: 'Rahul Verma',
+    senderCollege: 'CBIT Hyderabad',
+    senderAvatarBg: '#5425A8',
+    receiverId: 'student-srija',
+    receiverName: 'Srija Chinta',
+    receiverCollege: 'Vasavi College of Engg',
+    receiverAvatarBg: '#7546D8',
+    teachingSkill: 'Java',
+    learningSkill: 'Python',
+    message: 'Hey Srija! I saw you are looking for Spring Boot and Core Java. I can teach you Spring Data JPA, and in return I would love to learn Python algorithmic paradigms from you!',
+    preferredMode: 'Online',
+    status: 'PENDING',
+    createdAt: '2026-10-29T14:30:00.000Z'
+  },
+  {
+    id: 'req-2',
+    senderId: 'student-srija',
+    senderName: 'Srija Chinta',
+    senderCollege: 'Vasavi College of Engg',
+    senderAvatarBg: '#7546D8',
+    receiverId: 'student-vikram',
+    receiverName: 'Vikram Malhotra',
+    receiverCollege: 'BITS Pilani',
+    receiverAvatarBg: '#16A36A',
+    teachingSkill: 'Machine Learning',
+    learningSkill: 'Docker',
+    message: 'Hi Vikram, I can walk you through Scikit-learn pipelines if you can guide me on containerizing ML apps using Docker!',
+    preferredMode: 'Online',
+    status: 'ACCEPTED',
+    createdAt: '2026-10-27T10:15:00.000Z',
+    updatedAt: '2026-10-28T11:00:00.000Z'
+  },
+  {
+    id: 'req-3',
+    senderId: 'student-ananya',
+    senderName: 'Ananya Sharma',
+    senderCollege: 'Osmania University',
+    senderAvatarBg: '#A78BFA',
+    receiverId: 'student-srija',
+    receiverName: 'Srija Chinta',
+    receiverCollege: 'Vasavi College of Engg',
+    receiverAvatarBg: '#7546D8',
+    teachingSkill: 'Data Science',
+    learningSkill: 'HTML',
+    message: 'Hello Srija, would love to exchange foundational web styling tips for Data Science analytics walkthroughs!',
+    preferredMode: 'Either',
+    status: 'ACCEPTED',
+    createdAt: '2026-10-25T16:00:00.000Z',
+    updatedAt: '2026-10-26T09:30:00.000Z'
+  }
+];
+
+export const INITIAL_SESSIONS: LearningSession[] = [
+  {
+    id: 'sess-1',
+    requestId: 'req-2',
+    mentorId: 'student-vikram',
+    mentorName: 'Vikram Malhotra',
+    learnerId: 'student-srija',
+    learnerName: 'Srija Chinta',
+    skillName: 'Docker',
+    date: '2026-11-02',
+    time: '18:00',
+    durationMinutes: 60,
+    mode: 'Online',
+    meetingLinkOrVenue: 'https://meet.google.com/peer-docker-srija',
+    description: 'Docker fundamentals: Container lifecycle, volumes, and multi-stage builds for Spring & Python services.',
+    status: 'UPCOMING',
+    createdAt: '2026-10-28T11:15:00.000Z'
+  },
+  {
+    id: 'sess-2',
+    requestId: 'req-3',
+    mentorId: 'student-srija',
+    mentorName: 'Srija Chinta',
+    learnerId: 'student-ananya',
+    learnerName: 'Ananya Sharma',
+    skillName: 'HTML & Semantic Web',
+    date: '2026-11-04',
+    time: '17:30',
+    durationMinutes: 45,
+    mode: 'Online',
+    meetingLinkOrVenue: 'https://meet.google.com/peer-html-learn',
+    description: 'Mastering semantic tags, accessibility best practices, and connecting styles to interactive layouts.',
+    status: 'UPCOMING',
+    createdAt: '2026-10-28T14:00:00.000Z'
+  },
+  {
+    id: 'sess-3',
+    mentorId: 'student-karthik',
+    mentorName: 'Karthik Reddy',
+    learnerId: 'student-srija',
+    learnerName: 'Srija Chinta',
+    skillName: 'Resume Building & ATS',
+    date: '2026-10-22',
+    time: '16:00',
+    durationMinutes: 60,
+    mode: 'Online',
+    meetingLinkOrVenue: 'Completed via Campus Library Lab',
+    description: 'Deep dive into ATS keyword matching, project phrasing, and GitHub portfolio presentation.',
+    status: 'COMPLETED',
+    createdAt: '2026-10-20T10:00:00.000Z',
+    completedAt: '2026-10-22T17:00:00.000Z',
+    mentorRating: 5,
+    learnerRating: 5,
+    notes: 'Exceptional session. Srija revised her technical resume section with high-impact action verbs.'
+  }
+];
+
+export const INITIAL_ACTIVITIES: ActivityLog[] = [
+  {
+    id: 'act-1',
+    type: 'MATCH',
+    title: 'Mutual Match Detected',
+    description: 'Srija Chinta and Rahul Verma share a 100% reciprocal match (Python ⇄ Java)!',
+    studentId: 'student-srija',
+    studentName: 'Srija Chinta',
+    timestamp: 'Just now'
+  },
+  {
+    id: 'act-2',
+    type: 'REQUEST',
+    title: 'New Exchange Request',
+    description: 'Rahul Verma requested a skill exchange with Srija Chinta (Java for Python).',
+    studentId: 'student-rahul',
+    studentName: 'Rahul Verma',
+    timestamp: '15 minutes ago'
+  },
+  {
+    id: 'act-3',
+    type: 'ACCEPT',
+    title: 'Exchange Request Accepted',
+    description: 'Vikram Malhotra accepted Srija Chinta\'s Docker & ML exchange proposal.',
+    studentId: 'student-vikram',
+    studentName: 'Vikram Malhotra',
+    timestamp: '1 day ago'
+  },
+  {
+    id: 'act-4',
+    type: 'SESSION_COMPLETED',
+    title: 'Learning Session Completed',
+    description: 'Karthik Reddy and Srija Chinta completed a 60-min session on Resume Building (+100 XP awarded).',
+    studentId: 'student-karthik',
+    studentName: 'Karthik Reddy',
+    timestamp: '3 days ago'
+  },
+  {
+    id: 'act-5',
+    type: 'SKILL_ADDED',
+    title: 'New Skill Cataloged',
+    description: 'Ananya Sharma added "Data Science" to skills she can teach with Advanced proficiency.',
+    studentId: 'student-ananya',
+    studentName: 'Ananya Sharma',
+    timestamp: '4 days ago'
+  }
+];
+
+export const INITIAL_ANNOUNCEMENTS: Announcement[] = [
+  {
+    id: 'ann-1',
+    title: 'Mid-Semester Peer Skill Exchange Fair',
+    content: 'Schedule and complete at least 2 peer learning sessions this week to earn the exclusive "Campus Mentor" badge and 250 bonus XP!',
+    priority: 'HIGH',
+    author: 'Campus Academic Council & PeerLearn Admin',
+    createdAt: '2026-10-28T08:00:00.000Z'
+  },
+  {
+    id: 'ann-2',
+    title: 'New Skill Category: Cloud & DevOps',
+    content: 'Docker, Kubernetes, AWS, and Git are now active. Check out the top mentors on the leaderboard to arrange peer sessions.',
+    priority: 'NORMAL',
+    author: 'Platform Admin',
+    createdAt: '2026-10-24T12:00:00.000Z'
+  }
+];
+
+export const INITIAL_REVIEWS: ReviewItem[] = [
+  {
+    id: 'rev-1',
+    fromStudentName: 'Srija Chinta',
+    toStudentName: 'Karthik Reddy',
+    rating: 5,
+    comment: 'Karthik gave pinpoint feedback on my resume. In 45 minutes, we completely restructured my technical achievements. Incredible mentor!',
+    date: '2026-10-22'
+  },
+  {
+    id: 'rev-2',
+    fromStudentName: 'Ananya Sharma',
+    toStudentName: 'Srija Chinta',
+    rating: 5,
+    comment: 'Srija explained Python data structures and dictionary comprehensions so clearly. Very patient and knowledgeable.',
+    date: '2026-10-18'
+  },
+  {
+    id: 'rev-3',
+    fromStudentName: 'Rahul Verma',
+    toStudentName: 'Vikram Malhotra',
+    rating: 5,
+    comment: 'Vikram demystified Docker multi-stage builds. Got my Spring Boot container size down from 600MB to 180MB!',
+    date: '2026-10-15'
+  }
+];

@@ -1,0 +1,70 @@
+# ========================================================
+# PeerLearn - Multi-Container Docker Compose Specification
+# Includes: Spring Boot 3.3 (Java 21) App + MySQL 8.0 Database
+# ========================================================
+version: '3.8'
+
+services:
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0
+    container_name: peerlearn-mysql
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_DATABASE: ${DB_NAME:-peerlearn_db}
+    ports:
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - peerlearn_mysql_data:/var/lib/mysql
+      - ./spring-boot-backend/src/main/resources/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./spring-boot-backend/src/main/resources/data.sql:/docker-entrypoint-initdb.d/02-data.sql:ro
+    networks:
+      - peerlearn-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD:-root}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # PeerLearn Spring Boot Application Service
+  peerlearn-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: peerlearn-app:1.0
+    container_name: peerlearn-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-peerlearn_db}
+      DB_USERNAME: ${DB_USERNAME:-root}
+      DB_PASSWORD: ${DB_PASSWORD:-root}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - peerlearn-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health | grep -q 'UP' || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+
+# Persistent Named Volumes
+volumes:
+  peerlearn_mysql_data:
+    name: peerlearn_mysql_data
+
+# Internal Isolated Bridge Network
+networks:
+  peerlearn-network:
+    name: peerlearn-network
+    driver: bridge

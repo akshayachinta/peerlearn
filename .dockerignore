@@ -1,0 +1,41 @@
+# .dockerignore for PeerLearn Platform
+.git
+.gitignore
+README.md
+Jenkinsfile
+Dockerfile*
+docker-compose*.yml
+
+# Node.js and Frontend artifacts
+node_modules/
+dist/
+build/
+.aistudio/
+
+# Maven build artifacts
+target/
+**/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Logs and secrets
+*.log
+.env
+.env.*
+server_db.json

@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: peerlearn
+
+resources:
+  - 00-namespace.yaml
+  - 01-secret.yaml
+  - 02-mysql-pvc.yaml
+  - 03-mysql-deployment.yaml
+  - 04-mysql-service.yaml
+  - 05-app-deployment.yaml
+  - 06-app-service.yaml

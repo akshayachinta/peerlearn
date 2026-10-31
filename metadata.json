@@ -1,0 +1,6 @@
+{
+  "name": "PeerLearn - Student Skill Exchange Platform",
+  "description": "Student-to-student skill exchange platform with smart mutual skill matching, session scheduling, and separate admin dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

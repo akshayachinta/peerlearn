@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  labels:
+    app: peerlearn
+    tier: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: peerlearn
+      tier: database
+  template:
+    metadata:
+      labels:
+        app: peerlearn
+        tier: database
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "rootpassword"
+            - name: MYSQL_DATABASE
+              value: "peerlearn_db"
+            - name: MYSQL_USER
+              value: "peerlearn_user"
+            - name: MYSQL_PASSWORD
+              value: "peerlearn_pass"
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-persistent-storage
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  labels:
+    app: peerlearn
+    tier: database
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+  selector:
+    app: peerlearn
+    tier: database
+  clusterIP: None

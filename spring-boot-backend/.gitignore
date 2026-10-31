@@ -1,0 +1,54 @@
+# Maven build output
+target/
+*.class
+
+# Package files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Virtual Machine crash logs
+hs_err_pid*
+replay_pid*
+
+# IDE settings
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.project
+.classpath
+.settings/
+.springBeans
+
+# Logs & temp files
+logs/
+*.log
+*.tmp
+*.bak
+
+# Environment & Secrets
+.env
+*.env
+application-local.properties
+application-local.yml
+*.pem
+*.key
+*.jks
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Ensure Maven Wrapper is tracked
+!.mvn/wrapper/maven-wrapper.jar
+!mvnw
+!mvnw.cmd
+!Dockerfile
+!Jenkinsfile
+!k8s/
